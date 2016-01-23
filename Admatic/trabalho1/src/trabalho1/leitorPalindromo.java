@@ -18,18 +18,23 @@ public class leitorPalindromo {
 			escritor1 = new FileWriter("resultado.txt", true);												//inicializa escritor do arquivo de texto
 			while (leitor1.hasNextLine()) { //Loop principal, enquanto existir linhas no arquivo fonte
 				String palavra = leitor1.nextLine(); //Atribui o valor da primeira linha do arquivo fonte à variável palavra
-				boolean pldrm = false; //Flag que sinaliza se a palavra é ou não um palíndromo
-				int n = palavra.length(); //inteiro que indica o tamanho da palavra atribuída à variável
-				
-				for (int i=0; i<(n/2)+1; i++) { // Loop secundário
-					if (palavra.charAt(i) != palavra.charAt(n - i - 1)) {
+				boolean pldrm = true; //Flag que sinaliza se a palavra é ou não um palíndromo
+				int n = palavra.length() - 1; //inteiro que indica o tamanho da palavra atribuída à variável
+				int i = 0;
+				while (n > i) { //Loop secundário
+					if (n==0) {
+						break;
+					}
+					if (palavra.charAt(i) != palavra.charAt(n)){
 						pldrm = false;
+						n--;
+						i++;
 						break;
 					}
-					else if (palavra.charAt(i) == palavra.charAt(n - i - 1)) {
+					else 
 						pldrm = true;
-						break;
-					}
+					i++;
+					n--;
 				}
 				if (pldrm == true) { //Se a flag está em TRUE, a palavra é palíndromo.
 					escritor1.write(palavra+" Sim");
